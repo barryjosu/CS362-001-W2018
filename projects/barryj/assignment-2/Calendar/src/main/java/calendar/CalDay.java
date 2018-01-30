@@ -61,6 +61,7 @@ public class CalDay {
 	
 		setAppts(new LinkedList<Appt>());
 	
+		valid = true;
 	}
 	
 	/**

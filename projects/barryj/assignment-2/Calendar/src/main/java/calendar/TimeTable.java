@@ -32,6 +32,14 @@ public class TimeTable {
 		  
 		     //Create a linked list of calendar days <CalDay> to return
 	        LinkedList<CalDay> calDays = new LinkedList<CalDay>();
+	     
+
+	        
+	        //Make sure that the first day is before the last day
+	        if (!firstDay.before(lastDay)) {
+	        	throw new DateOutOfRangeException ("Second date specified is not  before the first date specified.");
+	        }
+	        
 	        
 	        //Create the first CalDay object with the starting date and add to list
 	        GregorianCalendar nextDay = (GregorianCalendar) firstDay.clone();
@@ -44,7 +52,9 @@ public class TimeTable {
 	        //Retrieve the appts - <appt> 
 		for (int i = 0; i < appts.size(); i++) {
 			Appt appt=appts.get(i);
-			if(!appt.getValid()) continue;
+			if(appt.getValid()){ 
+				continue;
+			}
 			// Figure out which days the appointment occurs on
 			LinkedList<GregorianCalendar> apptOccursOnDays = getApptOccurences(
 					appt, firstDay, lastDay);
@@ -52,7 +62,7 @@ public class TimeTable {
 			// For each day in the list, calculate the difference between the
 			// first day and the day of occurrence and add the appointment to
 			// the correct CalDay
-			int daysDifference = 1;
+			int daysDifference = 0;
 			nextDay = (GregorianCalendar) firstDay.clone();
 			Iterator<GregorianCalendar> itr = apptOccursOnDays.iterator();
 			while (itr.hasNext()) {
@@ -77,8 +87,7 @@ public class TimeTable {
 	     * occurs. The days are guaranteed to be between firstDay (inclusive) and
 	     * lastDay (exclusive). They are guaranteed to be in order.
 	     **/
-	    private static LinkedList<GregorianCalendar> getApptOccurences(Appt appt, 
-	        GregorianCalendar firstDay, GregorianCalendar lastDay) {
+	    private static LinkedList<GregorianCalendar> getApptOccurences(Appt appt, GregorianCalendar firstDay, GregorianCalendar lastDay) {
 	        
 	        LinkedList<GregorianCalendar> result = new LinkedList<GregorianCalendar>();
 	        
