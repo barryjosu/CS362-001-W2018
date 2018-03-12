@@ -1,0 +1,10 @@
+I found three bugs in my teammate's code.
+
+1. In Appt.java, on line 125
+There is an off by one error here; where it checks that startMonth>11, it should be checking for >12. 
+
+2. In CalDay.java, on lines 59-61
+day++, month++, and year++ should just be day, month, and year. There is no reason to increment them.
+
+3. In CalendarUtil.java, on line 33
+|| should be &&, since we need to ensure that it is a leap year AND February before making the month longer.
