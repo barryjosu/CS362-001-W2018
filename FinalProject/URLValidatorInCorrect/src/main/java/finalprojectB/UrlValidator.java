@@ -277,7 +277,7 @@ public class UrlValidator implements Serializable {
             }
             allowedSchemes = new HashSet<String>(schemes.length);
             for(int i=0; i < schemes.length; i++) {
-                //BUG HERE VVV toUpperCase is toLowerCase in original
+                //BUG HERE VVV
                 allowedSchemes.add(schemes[i].toUpperCase(Locale.ENGLISH));
 
             }
@@ -313,7 +313,7 @@ public class UrlValidator implements Serializable {
         }
 
         String authority = urlMatcher.group(PARSE_URL_AUTHORITY);
-        //BUG HERE VVV "http" is "file" in original
+        //BUG HERE VVV 
         if ("http".equals(scheme)) {// Special case - file: allows an empty authority
             if (authority != null) {
                 if (authority.contains(":")) { // but cannot allow trailing :
